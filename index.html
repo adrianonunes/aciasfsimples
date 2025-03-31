@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACIASF - Associação Comercial e Industrial de São Fidélis</title>
+    <style>
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #00a8e8;
+            --accent-color: #ff6b6b;
+            --dark-color: #333;
+            --light-color: #f8f9fa;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: linear-gradient(135deg, #394cf9, #20026c);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            max-height: 100px;
+            padding: 5px;
+            border-radius: 8px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icon {
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* Banner */
+        .banner-container {
+            width: 100%;
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner {
+            width: 100%;
+            height: 100%;
+            display: none;
+            background-size: cover;
+            background-position: center;
+            animation: fade 1.5s;
+        }
+
+        .active-banner {
+            display: block;
+        }
+
+        @keyframes fade {
+            from {opacity: 0.4}
+            to {opacity: 1}
+        }
+
+        .banner-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .active-dot, .dot:hover {
+            background-color: var(--light-color);
+        }
+
+        /* Video section */
+        .video-section {
+            width: 90%;
+            margin: 4rem auto;
+            text-align: center;
+        }
+
+        .video-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border-radius: 10px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Benefícios */
+        .benefits-section {
+            padding: 4rem 5%;
+            background-color: var(--light-color);
+        }
+
+        .benefits-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .benefit-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .benefit-description {
+            color: #666;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            padding: 3rem 5%;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .footer-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .footer-info p {
+            margin-bottom: 0.5rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* WhatsApp Flutuante */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+    /* Seção "Quero ser um associado" */
+    .join-section {
+        background: linear-gradient(135deg, #394cf9, #20026c);
+        padding: 2rem 5%;
+        text-align: center;
+        color: white;
+    }
+
+    .join-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        backdrop-filter: blur(5px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .join-title {
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .price-tag {
+        display: inline-block;
+        margin: 1rem 0 2rem;
+        padding: 0.5rem 2rem;
+        background-color: var(--accent-color);
+        border-radius: 50px;
+        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        transform: rotate(-2deg);
+    }
+
+    .price-value {
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+
+    .price-period {
+        font-size: 1.2rem;
+    }
+
+    .join-description {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .join-button {
+        display: inline-block;
+        padding: 1rem 2.5rem;
+        background-color: white;
+        color: var(--primary-color);
+        font-weight: bold;
+        font-size: 1.1rem;
+        text-decoration: none;
+        border-radius: 50px;
+        transition: var(--transition);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .join-button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        background-color: var(--accent-color);
+        color: white;
+    }
+
+    /* Responsividade para a seção de associação */
+    @media (max-width: 768px) {
+        .join-title {
+            font-size: 1.8rem;
+        }
+        
+        .price-value {
+            font-size: 2rem;
+        }
+        
+        .join-description {
+            font-size: 1rem;
+        }
+        
+        .join-button {
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+        }
+    }
+
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .banner-container {
+                height: 300px;
+            }
+
+            .video-title, .benefits-title {
+                font-size: 2rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <img src="images/logoaciasf.png" alt="ACIASF Logo" class="logo">
+        <div class="social-icons">
+            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </header>
+
+    <!-- Banner Rotativo -->
+    <div class="banner-container">
+        <div class="banner active-banner" style="background-image: url('images/banners/banner1.png');"></div>
+        <div class="banner" style="background-image: url('images/banners/banner2.png');"></div>
+        <div class="banner" style="background-image: url('images/banners/banner3.png');"></div>
+        
+        <div class="banner-dots">
+            <span class="dot active-dot" onclick="currentBanner(0)"></span>
+            <span class="dot" onclick="currentBanner(1)"></span>
+            <span class="dot" onclick="currentBanner(2)"></span>
+        </div>
+    </div>
+
+    <!-- Seção de Vídeo -->
+    <!-- Seção de Vídeo -->
+    <section class="video-section">
+        <h2 class="video-title">Quem Somos</h2>
+        <div class="video-container">
+            <iframe 
+                src="https://www.youtube-nocookie.com/embed/SDHrog7R9fA?rel=0&autoplay=0" 
+                title="ACIASF - Quem Somos" 
+                frameborder="0" 
+                allowfullscreen 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            ></iframe>
+        </div>
+    </section>
+
+    <!-- Seção de Benefícios -->
+    <section class="benefits-section">        
+        
+        <!-- Serviços Gratuitos -->
+        <div class="benefit-category" style="margin-bottom: 50px;">
+            <h3 style="color: var(--primary-color); font-size: 1.8rem; text-align: center; margin-bottom: 30px; position: relative; padding-bottom: 10px;">
+                <i class="fas fa-gift" style="margin-right: 10px;"></i>Benefícios para os Associados
+                <span style="display: block; width: 100px; height: 3px; background-color: var(--secondary-color); margin: 10px auto 0;"></span>
+            </h3>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-gavel"></i></div>
+                    <h3 class="benefit-title">Assessoria Jurídica</h3>
+                    <p class="benefit-description">Acesso a advogados especializados para: orientação em contratos comerciais, resolução de conflitos com clientes/fornecedores, consultoria em questões trabalhistas e análise de documentos legais para seu negócio.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-search"></i></div>
+                    <h3 class="benefit-title">Consultas CPF/CNPJ</h3>
+                    <p class="benefit-description">Busca do número do CPF no sistema SPC Brasil/Serasa e consultas de informações no sistema do SCPC Boa Vista para verificação de crédito de clientes.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-eraser"></i></div>
+                    <h3 class="benefit-title">Serviço de Exclusão</h3>
+                    <p class="benefit-description">Serviço de exclusão do cliente no sistema de negativação, agilizando processos administrativos e garantindo conformidade legal.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-check-circle"></i></div>
+                    <h3 class="benefit-title">Consultas Gratuitas</h3>
+                    <p class="benefit-description">05 consultas mensais (simples – Acerta) gratuitas no sistema do SCPC Boa Vista, permitindo análise de risco antes de fechar negócios.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Utilização dos Espaços -->
+        <div class="benefit-category" style="margin-bottom: 50px; background-color: rgba(0, 86, 179, 0.05); padding: 40px 20px; border-radius: 10px;">
+            <h3 style="color: var(--primary-color); font-size: 1.8rem; text-align: center; margin-bottom: 30px; position: relative; padding-bottom: 10px;">
+                <i class="fas fa-building" style="margin-right: 10px;"></i>Utilização dos Espaços
+                <span style="display: block; width: 100px; height: 3px; background-color: var(--secondary-color); margin: 10px auto 0;"></span>
+            </h3>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-tv"></i></div>
+                    <h3 class="benefit-title">Sala Multimídia</h3>
+                    <p class="benefit-description">Climatizada, equipada com cadeiras universitárias, TV e quadro de vidro. Disponível em horário comercial (das 08h às 17h) mediante agendamento prévio.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-users"></i></div>
+                    <h3 class="benefit-title">Auditório</h3>
+                    <p class="benefit-description">Espaço com 90 lugares, equipado com datashow, telão, som, microfones, ventiladores e banheiros. Disponível mediante agendamento de segunda a sábado, nos períodos da manhã e noite.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-glass-cheers"></i></div>
+                    <h3 class="benefit-title">Salão para Festas</h3>
+                    <p class="benefit-description">Espaço equipado com mesas, cadeiras, fogão, freezer e ampla cozinha com bancada para realização de eventos corporativos ou celebrações.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-bullhorn"></i></div>
+                    <h3 class="benefit-title">Divulgação</h3>
+                    <p class="benefit-description">Propaganda do seu comércio e produtos nas redes sociais da ACIASF - Site, Instagram e na Página do Facebook, ampliando seu alcance digital.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Parceria com o Sebrae -->
+        <div class="benefit-category" style="margin-bottom: 50px;">
+            <h3 style="color: var(--primary-color); font-size: 1.8rem; text-align: center; margin-bottom: 30px; position: relative; padding-bottom: 10px;">
+                <i class="fas fa-handshake" style="margin-right: 10px;"></i>Parceria com o Sebrae
+                <span style="display: block; width: 100px; height: 3px; background-color: var(--secondary-color); margin: 10px auto 0;"></span>
+            </h3>
+            
+            <div style="text-align: center; margin-bottom: 20px;">
+                <p style="font-size: 1.1rem;">De fevereiro a dezembro, a ACIASF em parceria com o Sebrae, oferece aos seus associados <strong>gratuitamente</strong>:</p>
+            </div>
+            
+            <div class="benefits-grid" style="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));">
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h3 class="benefit-title">Capacitação</h3>
+                    <p class="benefit-description">Cursos, oficinas e palestras ministradas por instrutores qualificados e capacitados, abordando temas relevantes para o desenvolvimento empresarial.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-store-alt"></i></div>
+                    <h3 class="benefit-title">Visitas Técnicas</h3>
+                    <p class="benefit-description">Visitas quinzenais de consultores especializados, pré-agendadas aos estabelecimentos dos associados, para orientação personalizada.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Convênios e Serviços Adicionais -->
+        <div class="benefit-category" style="margin-bottom: 50px; background-color: rgba(0, 86, 179, 0.05); padding: 40px 20px; border-radius: 10px;">
+            <h3 style="color: var(--primary-color); font-size: 1.8rem; text-align: center; margin-bottom: 30px; position: relative; padding-bottom: 10px;">
+                <i class="fas fa-percentage" style="margin-right: 10px;"></i>Convênios e Serviços Adicionais
+                <span style="display: block; width: 100px; height: 3px; background-color: var(--secondary-color); margin: 10px auto 0;"></span>
+            </h3>
+            
+            <div class="benefits-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-heartbeat"></i></div>
+                    <h3 class="benefit-title">SEGMED</h3>
+                    <p class="benefit-description">Tabela especial para associados na utilização dos serviços da SEGMED - Medicina do Trabalho, com descontos exclusivos.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3 class="benefit-title">Faculdade Censupeg</h3>
+                    <p class="benefit-description">Descontos especiais em cursos de graduação e pós-graduação para você e seus colaboradores.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-database"></i></div>
+                    <h3 class="benefit-title">Serviço de Inclusão</h3>
+                    <p class="benefit-description">Inclusão de clientes inadimplentes no sistema do SCPC Boa Vista por apenas R$5,00 por registro.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Investimento -->
+        <div class="benefit-category" style="text-align: center; max-width: 600px; margin: 0 auto; padding: 30px; background-color: white; border-radius: 10px; box-shadow: var(--shadow);">
+            <h3 style="color: var(--primary-color); font-size: 1.8rem; margin-bottom: 20px;">
+                <i class="fas fa-coins" style="margin-right: 10px;"></i>Seu Investimento
+            </h3>
+            
+            <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                <div style="padding: 15px; background-color: rgba(0, 168, 232, 0.1); border-radius: 8px;">
+                    <strong style="font-size: 1.2rem; color: var(--primary-color);">ME/EPP e outros portes:</strong>
+                    <p style="font-size: 1.5rem; font-weight: bold; margin-top: 5px;">Mensalidade: R$71,60</p>
+                </div>
+                
+                <div style="padding: 15px; background-color: rgba(0, 168, 232, 0.1); border-radius: 8px;">
+                    <strong style="font-size: 1.2rem; color: var(--primary-color);">MEI – Micro Empreendedor Individual:</strong>
+                    <p style="font-size: 1.5rem; font-weight: bold; margin-top: 5px;">Mensalidade: R$55,00</p>
+                </div>
+            </div>
+            
+            <button style="margin-top: 30px; padding: 15px 30px; background-color: var(--accent-color); color: white; border: none; border-radius: 30px; font-size: 1.2rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: transform 0.3s, box-shadow 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 16px rgba(0, 0, 0, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';">
+                Associe-se Agora!
+            </button>
+        </div>
+    </section>
+
+    <div class="join-section">
+        <div class="join-container">
+            <h2 class="join-title">Quero ser um associado</h2>
+            <div class="price-tag">
+                <span class="price-value">R$ 99,90</span>
+                <span class="price-period">/mês</span>
+            </div>
+            <p class="join-description">Invista no futuro do seu negócio e aproveite todos os benefícios exclusivos para associados.</p>
+            <a href="#" class="join-button">Associe-se agora</a>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-info">
+                <h3>Endereço</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Av Sete de Setembro, 156, Altos, Centro</p>
+                <p>São Fidélis - RJ</p>
+            </div>
+            <div class="footer-info">
+                <h3>Horário de Funcionamento</h3>
+                <p><i class="far fa-clock"></i> Segunda a Sexta: 08h às 17h</p>
+                <p><i class="far fa-clock"></i> Sábado: 08h às 12h</p>
+            </div>
+            <div class="footer-info">
+                <h3>Contato</h3>
+                <p><i class="fas fa-phone"></i> (22) XXXX-XXXX</p>
+                <p><i class="fas fa-envelope"></i> contato@aciasf.com.br</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 ACIASF - Associação Comercial e Industrial de São Fidélis. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Flutuante -->
+    <a href="https://wa.me/552212345678" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script>
+        // Banner Rotativo
+        let bannerIndex = 0;
+        const banners = document.getElementsByClassName("banner");
+        const dots = document.getElementsByClassName("dot");
+        
+        function showBanners() {
+            for (let i = 0; i < banners.length; i++) {
+                banners[i].classList.remove("active-banner");
+                dots[i].classList.remove("active-dot");
+            }
+            
+            bannerIndex++;
+            if (bannerIndex > banners.length - 1) {
+                bannerIndex = 0;
+            }
+            
+            banners[bannerIndex].classList.add("active-banner");
+            dots[bannerIndex].classList.add("active-dot");
+            
+            setTimeout(showBanners, 5000); // Muda a cada 5 segundos
+        }
+
+        function currentBanner(n) {
+            bannerIndex = n - 1;
+            showBanners();
+        }
+
+        // Inicia o banner rotativo
+        showBanners();
+    </script>
+</body>
+</html>
